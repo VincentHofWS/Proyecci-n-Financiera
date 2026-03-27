@@ -1815,7 +1815,7 @@
             <div class="input-group">
               <label class="input-label">Capital inicial</label>
               <div class="input-wrap">
-                <input class="input-field" type="number" id="in-capital" value="500000" min="0" step="10000">
+                <input class="input-field" type="number" id="in-capital" value="0" min="0" step="10000">
                 <span class="input-suffix">€</span>
               </div>
             </div>
@@ -1830,7 +1830,7 @@
             <div class="input-row-2">
               <div class="input-group" style="margin:0">
                 <label class="input-label">Año inicio</label>
-                <input class="input-field no-suffix" type="number" id="in-anio" value="2025" min="2020" max="2050">
+                <input class="input-field no-suffix" type="number" id="in-anio" value="2026" min="2020" max="2050">
               </div>
               <div class="input-group" style="margin:0">
                 <label class="input-label">Año fin</label>
@@ -1857,14 +1857,14 @@
               <div class="input-group" style="margin:0">
                 <label class="input-label">Rent. bruta</label>
                 <div class="input-wrap">
-                  <input class="input-field" type="number" id="in-bruta" value="8.0" min="0" max="30" step="0.1">
+                  <input class="input-field" type="number" id="in-bruta" value="0" min="0" max="30" step="0.1">
                   <span class="input-suffix">%</span>
                 </div>
               </div>
               <div class="input-group" style="margin:0">
                 <label class="input-label">Comisiones TER</label>
                 <div class="input-wrap">
-                  <input class="input-field" type="number" id="in-ter" value="1.2" min="0" max="5" step="0.1">
+                  <input class="input-field" type="number" id="in-ter" value="0" min="0" max="5" step="0.1">
                   <span class="input-suffix">%</span>
                 </div>
               </div>
@@ -1893,14 +1893,14 @@
               <div class="input-group" style="margin:0">
                 <label class="input-label">Inflación anual</label>
                 <div class="input-wrap">
-                  <input class="input-field" type="number" id="in-inflacion" value="2.5" min="0" max="20" step="0.1">
+                  <input class="input-field" type="number" id="in-inflacion" value="0" min="0" max="20" step="0.1">
                   <span class="input-suffix">%</span>
                 </div>
               </div>
               <div class="input-group" style="margin:0">
                 <label class="input-label">Tipo impositivo</label>
                 <div class="input-wrap">
-                  <input class="input-field" type="number" id="in-impuesto" value="21.0" min="0" max="50" step="0.5">
+                  <input class="input-field" type="number" id="in-impuesto" value="0" min="0" max="50" step="0.5">
                   <span class="input-suffix">%</span>
                 </div>
               </div>
@@ -1936,7 +1936,7 @@
               <div class="input-group" style="margin:0">
                 <label class="input-label">Δ Optimista</label>
                 <div class="input-wrap">
-                  <input class="input-field" type="number" id="in-delta-opt" value="2.0" step="0.5">
+                  <input class="input-field" type="number" id="in-delta-opt" value="0" step="0.5">
                   <span class="input-suffix">%</span>
                 </div>
               </div>
@@ -1967,7 +1967,7 @@
             <div class="input-group">
               <label class="input-label">Volatilidad Monte Carlo <em>(σ anual)</em></label>
               <div class="input-wrap">
-                <input class="input-field" type="number" id="in-sigma" value="12.0" min="1" max="40" step="0.5">
+                <input class="input-field" type="number" id="in-sigma" value="0" min="0" max="40" step="0.5">
                 <span class="input-suffix">%</span>
               </div>
             </div>
@@ -2214,14 +2214,7 @@
   const SENS_DELTAS = [-3, -2, -1, 0, 1, 2, 3, 4];
   const SENS_HORIZONS = [5, 10, 15, 20, 25, 30];
 
-  const DEMO_PARTIDAS = [
-    { tipo:'ingreso', concepto:'Nómina',         importe:  80000, anioInicio:2025, anioFin:2032, indexada:false },
-    { tipo:'ingreso', concepto:'Alquiler',        importe:  12000, anioInicio:2025, anioFin:2099, indexada:true  },
-    { tipo:'ingreso', concepto:'Herencia',        importe: 150000, anioInicio:2028, anioFin:2028, indexada:false },
-    { tipo:'gasto',   concepto:'Gastos fijos',    importe:  30000, anioInicio:2025, anioFin:2099, indexada:true  },
-    { tipo:'gasto',   concepto:'Casa Alicante',   importe: 450000, anioInicio:2026, anioFin:2026, indexada:false },
-    { tipo:'gasto',   concepto:'Viajes',          importe:  20000, anioInicio:2025, anioFin:2099, indexada:false },
-  ];
+  const DEMO_PARTIDAS = [];
 
   /* ══════════════════════════════════════════════════════════════
      STATE
@@ -3708,17 +3701,17 @@
   /** Nominal/real view change */
   /** Reset to defaults */
   function resetDefaults() {
-    document.getElementById('in-capital').value    = 500000;
+    document.getElementById('in-capital').value    = 0;
     document.getElementById('in-horizonte').value  = 15;
-    document.getElementById('in-anio').value       = 2025;
-    document.getElementById('in-bruta').value      = 8.0;
-    document.getElementById('in-ter').value        = 1.2;
-    document.getElementById('in-inflacion').value  = 2.5;
-    document.getElementById('in-impuesto').value   = 21.0;
-    document.getElementById('in-delta-cons').value = -2.0;
-    document.getElementById('in-delta-opt').value  = 2.0;
-    document.getElementById('in-sigma').value      = 12.0;
-    state.partidas = DEMO_PARTIDAS.map((p, i) => ({ ...p, id: 'p' + i }));
+    document.getElementById('in-anio').value       = new Date().getFullYear();
+    document.getElementById('in-bruta').value      = 0;
+    document.getElementById('in-ter').value        = 0;
+    document.getElementById('in-inflacion').value  = 0;
+    document.getElementById('in-impuesto').value   = 0;
+    document.getElementById('in-delta-cons').value = 0;
+    document.getElementById('in-delta-opt').value  = 0;
+    document.getElementById('in-sigma').value      = 0;
+    state.partidas = [];
     renderPartidasSidebar();
     recalculate();
   }
@@ -4016,8 +4009,6 @@
   document.addEventListener('DOMContentLoaded', () => {
     updateSliderFill();
     initListeners();
-    // Cargar sesión guardada (localStorage). Si existe, sobrescribe demos.
-    const sessionLoaded = loadSession();
     renderPartidasSidebar();
     initSortable();
     recalculate();
